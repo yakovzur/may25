@@ -3,8 +3,13 @@ import clientPromise from './mongodb';
 export async function fetchRevenue() {
   const client = await clientPromise;
   const db = client.db();
-  const revenue = await db.collection('revenue').find({}).toArray();
-  return revenue;
+  const revenueDocs = await db.collection('revenue').find({}).toArray();
+
+  // Transform documents to match Revenue[] type
+  return revenueDocs.map((doc) => ({
+    month: doc.month,      // or doc._id if you use aggregation
+    revenue: doc.revenue,  // or doc.amount if that's your field
+  }));
 }
 
 export async function fetchDashboardStats() {
@@ -39,7 +44,7 @@ export async function fetchDashboardStats() {
   };
 }
 
-export async function fetchLatestInvoices(limit = 5) {
+export async function fetchLatestInvoices(limit = 5): Promise<LatestInvoice[]> {
   const client = await clientPromise;
   const db = client.db();
 
@@ -50,12 +55,22 @@ export async function fetchLatestInvoices(limit = 5) {
       $lookup: {
         from: 'customers',
         localField: 'customer_id',
-        foreignField: 'id',
+        foreignField: 'id', // or '_id' if that's your schema
         as: 'customer',
       },
     },
     { $unwind: '$customer' },
   ]).toArray();
 
-  return invoices;
+  // Transform to LatestInvoice[]
+  return invoices.map((doc) => ({
+    _id: doc._id.toString(),
+    amount: doc.amount,
+    date: doc.date,
+    customer: {
+      name: doc.customer.name,
+      email: doc.customer.email,
+      image_url: doc.customer.image_url,
+    },
+  }));
 }
