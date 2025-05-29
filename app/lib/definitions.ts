@@ -7,6 +7,7 @@ export type LatestInvoice = {
   _id: string;
   amount: number;
   date: string;
+  status: string; // <-- Add this line
   customer: {
     name: string;
     email: string;

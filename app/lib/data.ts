@@ -69,6 +69,7 @@ export async function fetchLatestInvoices(limit = 5): Promise<LatestInvoice[]> {
     _id: doc._id.toString(),
     amount: doc.amount,
     date: doc.date,
+    status: doc.status, // <-- Add this line
     customer: {
       name: doc.customer.name,
       email: doc.customer.email,
