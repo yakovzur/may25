@@ -38,10 +38,10 @@ export default async function LatestInvoices({
                 )}
                 <div className="min-w-0">
                   <p className="truncate text-sm font-semibold md:text-base">
-                    {invoice.customer?.name || invoice.name}
+                    {invoice.customer.name}
                   </p>
                   <p className="hidden text-sm text-gray-500 sm:block">
-                    {invoice.customer?.email || invoice.email}
+                    {invoice.customer.email}
                   </p>
                 </div>
               </div>
