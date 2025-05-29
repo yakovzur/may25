@@ -1,5 +1,7 @@
 import clientPromise from './mongodb';
 
+import { LatestInvoice } from './definitions';
+
 export async function fetchRevenue() {
   const client = await clientPromise;
   const db = client.db();
