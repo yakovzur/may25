@@ -103,3 +103,4 @@ export async function fetchAllCustomers() {
     // Add more fields if needed
   }));
 }
+
