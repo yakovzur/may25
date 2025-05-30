@@ -30,6 +30,15 @@ export default function Page() {
           >
             <span>Log in</span> <ArrowRightIcon className="w-5 md:w-6" />
           </Link>
+          <p className="mt-4 text-center">
+            Don&apos;t have an account?{' '}
+            <a
+              href="/login/register"
+              className="text-blue-600 underline"
+            >
+              Register
+            </a>
+          </p>
         </div>
         <div className="flex items-center justify-center p-6 md:w-3/5 md:px-28 md:py-12">
           <Image

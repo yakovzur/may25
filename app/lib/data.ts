@@ -91,3 +91,16 @@ export async function fetchCustomers() {
     image_url: customer.image_url,
   }));
 }
+
+export async function fetchAllCustomers() {
+  const client = await clientPromise;
+  const db = client.db();
+  const customers = await db.collection('users').find({}).toArray();
+
+  // Map to only the fields you want to show
+  return customers.map((customer) => ({
+    id: customer._id?.toString(),
+    email: customer.email,
+    // Add more fields if needed
+  }));
+}
