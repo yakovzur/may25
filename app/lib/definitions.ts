@@ -80,6 +80,8 @@ export type FormattedCustomersTable = {
 export type CustomerField = {
   _id: string;
   name: string;
+  email: string;
+  image_url?: string;
 };
 
 export type InvoiceForm = {
@@ -88,3 +90,50 @@ export type InvoiceForm = {
   amount: number;
   status: 'pending' | 'paid';
 };
+
+// MongoDB aggregation pipeline stages for invoices
+export const invoicePipeline = [
+  {
+    $match: {
+      // Match invoices with a specific customer_id
+      customer_id: 'some_customer_id',
+    },
+  },
+  {
+    $lookup: {
+      from: 'customers', // Join with the customers collection
+      let: { customer_id: '$customer_id' },
+      pipeline: [
+        {
+          $match: {
+            $expr: {
+              $and: [
+                { $eq: ['$_id', '$$customer_id'] }, // Match by customer_id
+                // Add more conditions if needed
+              ],
+            },
+          },
+        },
+      ],
+      as: 'customer_info',
+    },
+  },
+  {
+    $unwind: {
+      path: '$customer_info',
+      preserveNullAndEmptyArrays: true, // Keep invoices even if no matching customer
+    },
+  },
+  {
+    $project: {
+      // Include fields for the invoice and customer
+      _id: 1,
+      amount: 1,
+      date: 1,
+      status: 1,
+      'customer_info.name': 1,
+      'customer_info.email': 1,
+      'customer_info.image_url': 1,
+    },
+  },
+];
