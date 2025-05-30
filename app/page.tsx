@@ -24,7 +24,7 @@ export default async function Page() {
         >   
             <strong>Welcome to LouieNina.</strong> This is the example for the{' '}
             <a href="https://nextjs.org/learn/" className="text-blue-500">
-              Next.js 
+              Next.js q
             </a>
             , brought to you by Tzur
           </p>
