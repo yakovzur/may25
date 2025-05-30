@@ -103,3 +103,44 @@ export async function fetchAllCustomers() {
   }));
 }
 
+// Blog
+
+
+export async function fetchPosts() {
+  const client = await clientPromise;
+  const db = client.db();
+  return db.collection('posts').find({}).sort({ createdAt: -1 }).toArray();
+}
+
+export async function fetchPostById(id: string) {
+  const client = await clientPromise;
+  const db = client.db();
+  return db.collection('posts').findOne({ _id: new ObjectId(id) });
+}
+
+export async function createPost(title: string, content: string) {
+  const client = await clientPromise;
+  const db = client.db();
+  return db.collection('posts').insertOne({
+    title,
+    content,
+    createdAt: new Date(),
+    updatedAt: new Date(),
+  });
+}
+
+export async function updatePost(id: string, title: string, content: string) {
+  const client = await clientPromise;
+  const db = client.db();
+  return db.collection('posts').updateOne(
+    { _id: new ObjectId(id) },
+    { $set: { title, content, updatedAt: new Date() } }
+  );
+}
+
+export async function deletePost(id: string) {
+  const client = await clientPromise;
+  const db = client.db();
+  return db.collection('posts').deleteOne({ _id: new ObjectId(id) });
+}
+
