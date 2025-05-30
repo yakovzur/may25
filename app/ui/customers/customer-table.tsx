@@ -16,7 +16,7 @@ export default function CustomerTable({ customers }: { customers: Customer[] }) 
       <tbody>
         {customers.map((customer) => (
           <tr key={customer._id}>
-            <td className="px-4 py-2 border">{customer.id}</td>
+            <td className="px-4 py-2 border">{customer._id?.toString() ?? ''}</td>
             <td className="px-4 py-2 border">{customer.email}</td>
           </tr>
         ))}
