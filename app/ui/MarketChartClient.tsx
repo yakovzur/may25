@@ -48,7 +48,7 @@ export default function MarketChartClient({ sp500 }: { sp500: any[] }) {
       x: {
         type: 'time' as const,
         time: {
-          unit: 'minute',
+          unit: 'minute' as 'minute', // <-- cast as the correct union type
           tooltipFormat: 'HH:mm',
           displayFormats: {
             minute: 'HH:mm',
