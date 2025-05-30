@@ -93,6 +93,3 @@ export default function MarketChartClient({ sp500 }: { sp500: any[] }) {
     </div>
   );
 }
-
-// Usage
-<MarketChartClient sp500={sp500} />
