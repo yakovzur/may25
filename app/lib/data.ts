@@ -98,7 +98,7 @@ export async function fetchAllCustomers() {
   const customers = await db.collection('users').find({}).toArray();
 
   return customers.map((customer) => ({
-    id: customer._id?.toString(),
+    _id: customer._id?.toString() ?? '',
     email: customer.email,
     // Add more fields if needed
   }));
