@@ -97,7 +97,6 @@ export async function fetchAllCustomers() {
   const db = client.db();
   const customers = await db.collection('users').find({}).toArray();
 
-  // Map to only the fields you want to show
   return customers.map((customer) => ({
     id: customer._id?.toString(),
     email: customer.email,
