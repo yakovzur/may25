@@ -11,7 +11,7 @@ async function getUser(email: string): Promise<User | undefined> {
     const client = await clientPromise;
     const db = client.db();
     const user = await db.collection('users').findOne({ email });
-    return user as User | undefined;
+    return user as unknown as User | undefined; 
   } catch (error) {
     console.error('Failed to fetch user:', error);
     throw new Error('Failed to fetch user.');
