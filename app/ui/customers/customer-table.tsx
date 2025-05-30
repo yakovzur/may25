@@ -19,7 +19,7 @@ export default function CustomerTable({ customers }: { customers: Customer[] }) 
             <td className="px-4 py-2 border">{customer.id}</td>
             <td className="px-4 py-2 border">{customer.email}</td>
           </tr>
-        ))}
+        ))
       </tbody>
     </table>
   );
