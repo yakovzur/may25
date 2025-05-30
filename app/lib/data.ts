@@ -77,3 +77,17 @@ export async function fetchLatestInvoices(limit = 5): Promise<LatestInvoice[]> {
     },
   }));
 }
+
+export async function fetchCustomers() {
+  const client = await clientPromise;
+  const db = client.db();
+  const customers = await db.collection('customers').find({}).toArray();
+
+  // Optionally, map to only the fields you need:
+  return customers.map((customer) => ({
+    id: customer.id, // or customer._id if that's your schema
+    name: customer.name,
+    email: customer.email,
+    image_url: customer.image_url,
+  }));
+}
