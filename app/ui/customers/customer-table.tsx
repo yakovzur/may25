@@ -1,5 +1,5 @@
 type Customer = {
-  id: string;
+  _id: string;
   email: string;
   // Add more fields if needed
 };
