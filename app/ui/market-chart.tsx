@@ -16,17 +16,11 @@ async function fetchIndex(symbol: string) {
   return data['Time Series (Daily)'];
 }
 
-export default function MarketChart({ nasdaq, sp500 }: { nasdaq: any[]; sp500: any[] }) {
-  const labels = nasdaq.map((item) => item.date.toISOString().slice(0, 10));
+export default function MarketChart({ sp500 }: { sp500: any[] }) {
+  const labels = sp500.map((item) => item.date.toISOString().slice(0, 10));
   const chartData = {
     labels,
     datasets: [
-      {
-        label: 'NASDAQ',
-        data: nasdaq.map((item) => item.close),
-        borderColor: 'rgb(37, 99, 235)',
-        backgroundColor: 'rgba(37, 99, 235, 0.2)',
-      },
       {
         label: 'S&P 500',
         data: sp500.map((item) => item.close),
@@ -38,7 +32,7 @@ export default function MarketChart({ nasdaq, sp500 }: { nasdaq: any[]; sp500: a
 
   return (
     <div className="bg-white rounded-lg p-4 shadow">
-      <h2 className="text-lg font-semibold mb-2">NASDAQ & S&amp;P 500 (Last Month)</h2>
+      <h2 className="text-lg font-semibold mb-2 text-center">S&amp;P 500 </h2>
       <Line data={chartData} />
     </div>
   );

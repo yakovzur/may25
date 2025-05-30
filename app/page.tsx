@@ -44,17 +44,10 @@ export default async function Page() {
             </a>
           </p>
         </div>
-        <div className="flex items-center justify-center p-6 md:w-3/5 md:px-28 md:py-12">
-          <div className="flex items-center justify-center p-6 md:w-3/5 md:px-28 md:py-12">
-            <MarketChartClient nasdaq={nasdaq} sp500={sp500} />
+        <div className="flex flex-1 items-center justify-center w-full p-2 md:p-8">
+          <div className="w-full max-w-3xl h-[60vw] min-h-[350px] max-h-[600px]">
+            <MarketChartClient sp500={sp500} />
           </div>
-          <Image
-            src="/hero-mobile.png"
-            width={560}
-            height={620}
-            className="block md:hidden"
-            alt="Screenshots of the dashboard project showing mobile version"
-          />
         </div>
       </div>
     </main>
