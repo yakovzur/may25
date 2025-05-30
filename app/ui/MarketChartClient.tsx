@@ -48,16 +48,17 @@ export default function MarketChartClient({ sp500 }: { sp500: any[] }) {
       x: {
         type: 'time' as const,
         time: {
-          unit: 'minute' as 'minute', // <-- cast as the correct union type
-          tooltipFormat: 'HH:mm',
+          unit: 'day' as const, // Use 'minute' as const if your data is intraday
+          tooltipFormat: 'MMM d, yyyy',
           displayFormats: {
+            day: 'MMM d',
             minute: 'HH:mm',
             hour: 'HH:mm',
           },
         },
         title: {
           display: true,
-          text: 'Time',
+          text: 'Date',
         },
         grid: {
           display: false,
@@ -76,7 +77,11 @@ export default function MarketChartClient({ sp500 }: { sp500: any[] }) {
           color: '#f3f4f6',
         },
         ticks: {
-          callback: (value: number) => `$${value.toLocaleString()}`,
+          callback: function (tickValue: string | number) {
+            // Chart.js may pass string or number, so handle both
+            const num = typeof tickValue === 'number' ? tickValue : Number(tickValue);
+            return `$${num.toLocaleString()}`;
+          },
         },
       },
     },
