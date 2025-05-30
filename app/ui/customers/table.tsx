@@ -24,7 +24,7 @@ export default async function CustomersTable({
               <div className="md:hidden">
                 {customers?.map((customer) => (
                   <div
-                    key={customer.id}
+                    key={customer._id} // <-- change from customer.id to customer._id
                     className="mb-2 w-full rounded-md bg-white p-4"
                   >
                     <div className="flex items-center justify-between border-b pb-4">
