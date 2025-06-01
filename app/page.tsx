@@ -40,8 +40,8 @@ export default async function Page() {
         </div>
         <div className="flex justify-center items-center md:w-2/5 w-full">
           <Image
-            src="/Louie.jpg"
-            alt="Louie"
+            src="/loe.png"
+            alt="loe"
             width={350}
             height={350}
             className="rounded-xl object-cover w-full max-w-xs md:max-w-full"
