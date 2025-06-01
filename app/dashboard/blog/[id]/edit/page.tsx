@@ -6,6 +6,15 @@ export default async function EditBlogPage({ params }: { params: Promise<{ id: s
   const { id } = await params;
   const post = await fetchPostById(id);
 
+  if (!post) {
+    return (
+      <main className="p-6">
+        <h1 className="text-2xl font-bold mb-4">Post Not Found</h1>
+        <Link href="/dashboard/blog" className="text-blue-600 underline">Back to Blog</Link>
+      </main>
+    );
+  }
+
   return (
     <main className="p-6">
       <h1 className="text-2xl font-bold mb-4">Edit Blog Post</h1>
