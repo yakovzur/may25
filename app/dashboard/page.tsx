@@ -57,7 +57,7 @@ export default async function DashboardPage() {
       <div className="bg-gray-50 rounded p-6 text-gray-700">
         <h3 className="text-lg font-semibold mb-2">Welcome!</h3>
         <p>
-          This is your dashboard. Use the cards above to quickly access your blog and customer management tools.
+          This is your dashboard. Use the cards above to quickly access your blog and management tools.
           You can customize this page to show stats, recent activity, or anything else you need.
         </p>
       </div>
