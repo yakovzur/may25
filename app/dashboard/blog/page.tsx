@@ -1,3 +1,7 @@
+export const dynamic = "force-dynamic";
+// export const fetchCache = "force-no-store";
+
+
 import { fetchPosts } from '@/app/lib/data';
 import BlogTable from '@/app/ui/blog/blog-table';
 import { createBlogPost } from './actions';

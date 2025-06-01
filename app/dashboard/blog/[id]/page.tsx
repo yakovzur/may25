@@ -1,3 +1,5 @@
+export const dynamic = "force-dynamic";
+// export const fetchCache = "force-no-store";
 import { fetchPostById } from '@/app/lib/data';
 import Link from 'next/link';
 
