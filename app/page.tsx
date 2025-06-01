@@ -51,7 +51,7 @@ export default async function Page() {
       </div>
       <div className="mt-8 text-center text-gray-500">
         <p className="text-sm">
-          LouieNina is your site to go.
+          LouieNina is your Site to go.
         </p>
         <p className="text-xs">
           © {new Date().getFullYear()} LouieNina. All rights reserved.
