@@ -10,7 +10,7 @@ export default async function Page() {
   const { nasdaq, sp500 } = await fetchMarketData();
 
   return (
-    <main className="flex min-h-screen flex-col p-6">
+    <main className="flex flex-col items-center justify-center min-h-screen p-6">
       <div className="flex h-20 shrink-0 items-end rounded-lg bg-blue-500 p-4 md:h-52">
         <AcmeLogo />
       </div>
@@ -46,6 +46,24 @@ export default async function Page() {
             <MarketChartClient sp500={sp500} />
           </div>
         </div>
+      </div>
+      <h1 className="text-4xl font-bold mb-4">Welcome to Your Dashboard</h1>
+      <p className="text-lg text-gray-600 mb-8">
+        Use the sidebar to navigate to Blog, Customers, and more.
+      </p>
+      <div className="flex gap-4">
+        <a
+          href="/dashboard/blog"
+          className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition"
+        >
+          Go to Blog
+        </a>
+        <a
+          href="/dashboard/customers"
+          className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 transition"
+        >
+          Go to Customers
+        </a>
       </div>
     </main>
   );
