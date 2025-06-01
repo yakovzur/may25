@@ -1,9 +1,9 @@
 import { fetchPostById } from '@/app/lib/data';
 import Link from 'next/link';
 
-export default async function BlogViewPage(props: { params: { id: string } }) {
-  const { params } = props; // <-- Remove 'await' here
-  const post = await fetchPostById(params.id);
+export default async function BlogViewPage({ params }: { params: Promise<{ id: string }> }) {
+  const { id } = await params;
+  const post = await fetchPostById(id);
 
   if (!post) {
     return (
