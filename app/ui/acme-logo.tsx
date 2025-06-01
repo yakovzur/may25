@@ -13,7 +13,7 @@ export default function AcmeLogo() {
         height={48}
         className="h-16 w-16 rounded-full"
       />
-      <p className="text-[44px] ml-4">Louienina</p>
+      <p className="text-[44px] ml-4">LouieNina</p>
     </div>
   );
 }
