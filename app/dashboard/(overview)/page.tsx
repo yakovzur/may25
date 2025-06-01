@@ -5,6 +5,7 @@ import { fetchRevenue } from '@/app/lib/data';
 
 export default async function Page() {
   const revenue = await fetchRevenue();
+  const totalRevenue = revenue.reduce((sum, item) => sum + (item.revenue ?? 0), 0);
 
   return (
     <main>
@@ -12,7 +13,7 @@ export default async function Page() {
         Dashboard
       </h1>
       <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-        <Card title="Revenue" value={`$${revenue.total?.toLocaleString() ?? '0'}`} type="collected" />
+        <Card title="Revenue" value={`$${totalRevenue.toLocaleString()}`} type="collected" />
       </div>
       <div className="mt-6 grid grid-cols-1 gap-6 md:grid-cols-4 lg:grid-cols-8">
         <RevenueChart revenue={revenue} />
