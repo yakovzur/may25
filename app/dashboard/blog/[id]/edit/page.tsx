@@ -2,10 +2,11 @@ import { fetchPostById } from '@/app/lib/data';
 import { editBlogPost } from '../../actions';
 import Link from 'next/link';
 
-export default async function EditBlogPage({ params }: { params: { id: string } }) {
-  const post = await fetchPostById(params.id);
+export default async function EditBlogPage({ params }: { params: Promise<{ id: string }> }) {
+  const { id } = await params;
+  const post = await fetchPostById(id);
 
-  return
+  return (
     <main className="p-6">
       <h1 className="text-2xl font-bold mb-4">Edit Blog Post</h1>
       <form action={editBlogPost.bind(null, post._id.toString())} className="flex flex-col gap-2 max-w-xl">
