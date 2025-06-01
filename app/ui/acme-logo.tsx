@@ -11,7 +11,7 @@ export default function AcmeLogo() {
         alt="Tzur Logo"
         width={48}
         height={48}
-        className="h-16 w-16 rounded-full"
+        className="h-14 w-14 rounded-full"
       />
       <p className="text-[44px] ml-4">LouieNina</p>
     </div>

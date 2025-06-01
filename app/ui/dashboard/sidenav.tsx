@@ -9,14 +9,6 @@ export default function SideNav() {
       <nav className="flex flex-col gap-2">
         {/* Other nav links can go here */}
         <NavLinks />
-        {/* Blog link directly below NavLinks (e.g., below Customers) */}
-        <Link
-          href="/dashboard/blog"
-          className="flex items-center gap-2 rounded px-3 py-2 text-gray-700 hover:bg-gray-200 hover:text-black transition"
-        >
-          <PencilSquareIcon className="w-5 h-5" />
-          <span>Blog</span>
-        </Link>
       </nav>
       <div className="flex grow flex-row justify-between space-x-2 md:flex-col md:space-x-0 md:space-y-2">
         <div className="hidden h-auto w-full grow rounded-md bg-gray-50 md:block"></div>
