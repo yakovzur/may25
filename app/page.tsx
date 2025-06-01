@@ -30,23 +30,13 @@ export default async function Page() {
           </Link>
         </div>
       </div>
-      <h1 className="text-4xl font-bold mb-4">Welcome to Your Dashboard</h1>
-      <p className="text-lg text-gray-600 mb-8">
-        Use the sidebar to navigate to Blog, Customers, and more.
-      </p>
-      <div className="flex gap-4">
-        <a
-          href="/dashboard/blog"
-          className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition"
-        >
-          Go to Blog
-        </a>
-        <a
-          href="/dashboard/customers"
-          className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 transition"
-        >
-          Go to Customers
-        </a>
+      <div className="mt-8 text-center text-gray-500">
+        <p className="text-sm">
+          LouieNina is your site to go.
+        </p>
+        <p className="text-xs">
+          © {new Date().getFullYear()} LouieNina. All rights reserved.
+        </p>
       </div>
     </main>
   );
