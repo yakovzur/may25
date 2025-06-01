@@ -5,10 +5,10 @@ import { Metadata } from 'next';
  
 export const metadata: Metadata = {
   title: {
-    template: '%s | Louienina Dashboard',
-    default: 'Louienina Dashboard',
+    template: '%s | Louienina',
+    default: 'Louienina',
   },
-  description: 'The official Next.js Learn Dashboard built with App Router.',
+  description: 'The official from Tzur',
   metadataBase: new URL('https://www.louienina.com'),
 };
  
@@ -19,6 +19,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
+      <head>
+        <link rel="icon" href="/favicon.ico" />
+      </head>
       <body className={`${inter.className} antialiased`}>{children}</body>
     </html>
   );
