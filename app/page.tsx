@@ -2,12 +2,9 @@ import AcmeLogo from '@/app/ui/acme-logo';
 import { ArrowRightIcon } from '@heroicons/react/24/outline';
 import Link from 'next/link';
 import { lusitana } from '@/app/ui/fonts';
-import Image from 'next/image';
-import { fetchMarketData } from '@/app/lib/market-data';
-import MarketChartClient from '@/app/ui/market-chart-client';
 
 export default async function Page() {
-  const { nasdaq, sp500 } = await fetchMarketData();
+
 
   return (
     <main className="flex flex-col items-center justify-center min-h-screen p-6">
@@ -31,20 +28,6 @@ export default async function Page() {
           >
             <span>Log in</span> <ArrowRightIcon className="w-5 md:w-6" />
           </Link>
-          <p className="mt-4 text-center">
-            Don&apos;t have an account?{' '}
-            <a
-              href="/login/register"
-              className="text-blue-600 underline"
-            >
-              Register
-            </a>
-          </p>
-        </div>
-        <div className="flex flex-1 items-center justify-center w-full p-2 md:p-8">
-          <div className="w-full max-w-3xl h-[60vw] min-h-[350px] max-h-[600px]">
-            <MarketChartClient sp500={sp500} />
-          </div>
         </div>
       </div>
       <h1 className="text-4xl font-bold mb-4">Welcome to Your Dashboard</h1>
