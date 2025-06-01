@@ -2,10 +2,13 @@ import Link from 'next/link';
 import { fetchPosts } from '@/app/lib/data';
 
 export default async function DashboardPage() {
-  // Fetch latest 3 blog posts
   const posts = await fetchPosts();
   const latestPosts = posts
-    .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
+    .sort((a, b) => {
+      const dateA = new Date(a.createdAt ?? 0).getTime();
+      const dateB = new Date(b.createdAt ?? 0).getTime();
+      return dateB - dateA;
+    })
     .slice(0, 3)
     .map((post: any) => ({
       _id: post._id.toString(),
@@ -35,31 +38,7 @@ export default async function DashboardPage() {
               </li>
             ))}
           </ul>
-          <Link
-            href="/dashboard/blog"
-            className="bg-blue-600 text-white px-3 py-1 rounded hover:bg-blue-700 transition text-sm"
-          >
-            Go to Blog
-          </Link>
         </div>
-        {/* Customers box - half width */}
-        <div className="bg-white rounded shadow p-3 flex flex-col items-start">
-          <h2 className="text-xl font-semibold mb-2">Customers</h2>
-          <p className="mb-4 text-gray-600">View and manage your registered customers.</p>
-          <Link
-            href="/dashboard/customers"
-            className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 transition"
-          >
-            Go to Customers
-          </Link>
-        </div>
-      </div>
-      <div className="bg-gray-50 rounded p-6 text-gray-700">
-        <h3 className="text-lg font-semibold mb-2">Welcome!</h3>
-        <p>
-          This is your dashboard. Use the cards above to quickly access your blog and customer management tools.
-          You can customize this page to show stats, recent activity, or anything else you need.
-        </p>
       </div>
     </main>
   );
