@@ -1,45 +1,21 @@
-import Link from 'next/link';
-import { PencilIcon, TrashIcon } from '@heroicons/react/24/outline';
-import {
-  addStockDiaryEntry,
-  getStockDiaryEntries,
-  deleteStockDiaryEntry,
-} from './actions';
+import Link from "next/link";
+import { PencilIcon, TrashIcon } from "@heroicons/react/24/outline";
+import StockDiaryAddForm from "./StockDiaryAddForm";
+import { addStockDiaryEntry, getStockDiaryEntries, deleteStockDiaryEntry } from "./actions";
+import { headers } from "next/headers";
 
 export default async function StockDiaryPage() {
   const entries = await getStockDiaryEntries();
 
+  // Fetch latest prices for all tickers in parallel
+  const prices = await Promise.all(
+    entries.map((entry: any) => fetchLatestPrice(entry.ticker))
+  );
+
   return (
     <main className="p-8">
       <h1 className="text-2xl font-bold mb-4">Stock Diary</h1>
-      <form action={addStockDiaryEntry} className="flex flex-col gap-2 max-w-md mb-8">
-        <input
-          name="ticker"
-          placeholder="Ticker"
-          required
-          className="border p-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-400 transition"
-        />
-        <input
-          name="price"
-          placeholder="Price (USD)"
-          type="number"
-          step="0.01"
-          required
-          className="border p-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-400 transition"
-        />
-        <textarea
-          name="comments"
-          placeholder="Comments"
-          rows={5}
-          className="border p-2 rounded resize-y min-h-[100px] focus:outline-none focus:ring-2 focus:ring-blue-400 transition"
-        />
-        <button
-          type="submit"
-          className="self-end bg-gradient-to-r from-blue-500 to-blue-700 text-white px-4 py-1.5 rounded-md text-sm font-semibold shadow hover:from-blue-600 hover:to-blue-800 transition"
-        >
-          Add
-        </button>
-      </form>
+      <StockDiaryAddForm onAdd={addStockDiaryEntry} />
       <div className="overflow-x-auto">
         <table className="min-w-full border text-left">
           <thead>
@@ -51,7 +27,7 @@ export default async function StockDiaryPage() {
             </tr>
           </thead>
           <tbody>
-            {entries.map((entry: any) => (
+            {entries.map((entry: any, idx: number) => (
               <tr key={entry._id}>
                 <td className="p-2 border-b">
                   <Link
@@ -61,11 +37,15 @@ export default async function StockDiaryPage() {
                     {entry.ticker}
                   </Link>
                 </td>
-                <td className="p-2 border-b">${entry.price}</td>
+                <td className="p-2 border-b">
+                  {prices[idx] !== null && !isNaN(Number(prices[idx]))
+                    ? `$${Number(prices[idx]).toFixed(2)}`
+                    : "N/A"}
+                </td>
                 <td className="p-2 border-b">
                   {entry.createdAt
                     ? new Date(entry.createdAt).toLocaleString()
-                    : ''}
+                    : ""}
                 </td>
                 <td className="p-2 border-b text-right">
                   <div className="flex justify-end items-center gap-2">
@@ -95,4 +75,19 @@ export default async function StockDiaryPage() {
       </div>
     </main>
   );
+}
+
+// Helper to fetch the latest price from your API for a given ticker
+async function fetchLatestPrice(ticker: string): Promise<number | null> {
+  try {
+    const headersList = await headers(); // <-- await here!
+    const host = headersList.get("host");
+    const protocol = process.env.NODE_ENV === "development" ? "http" : "https";
+    const url = `${protocol}://${host}/api/stock-price?ticker=${ticker}`;
+    const res = await fetch(url, { cache: "no-store" });
+    const data = await res.json();
+    return data.price !== undefined && data.price !== null ? Number(data.price) : null;
+  } catch {
+    return null;
+  }
 }
