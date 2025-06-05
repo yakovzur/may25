@@ -32,6 +32,7 @@ export default async function TickerDetailPage(props: { params: Promise<{ id: st
     ...entry,
     _id: entry._id.toString(),
     createdAt: entry.createdAt?.toISOString?.() ?? "",
+    ticker: entry.ticker,
   };
 
   // Fetch latest price from API
