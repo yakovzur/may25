@@ -1,6 +1,6 @@
-import Link from 'next/link';
+
 import NavLinks from '@/app/ui/dashboard/nav-links';
-import { PowerIcon, PencilSquareIcon } from '@heroicons/react/24/outline';
+import { PowerIcon } from '@heroicons/react/24/outline';
 import { signOut } from '@/app/auth';
  
 export default function SideNav() {
