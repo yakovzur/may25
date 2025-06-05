@@ -15,22 +15,18 @@ export default function BlogTable({ posts }: { posts: any[] }) {
   }
 
   return (
-    <table className="min-w-full divide-y divide-gray-200 bg-white rounded shadow">
+    <table className="min-w-full border text-left">
       <thead>
-        <tr>
-          <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">
-            Title
-          </th>
-          <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">
-            Created
-          </th>
-          <th className="px-6 py-3"></th>
+        <tr className="bg-gray-100">
+          <th className="p-2 border-b">Title</th>
+          <th className="p-2 border-b">Content</th>
+          <th className="p-2 border-b">Date</th>
         </tr>
       </thead>
-      <tbody className="divide-y divide-gray-100">
+      <tbody>
         {posts.map((post) => (
           <tr key={post._id}>
-            <td className="px-6 py-4">
+            <td className="p-2 border-b">
               <Link
                 href={`/dashboard/blog/${post._id}`}
                 className="text-black hover:underline"
@@ -40,22 +36,15 @@ export default function BlogTable({ posts }: { posts: any[] }) {
                 {post.title}
               </Link>
             </td>
-            <td className="px-6 py-4">{post.createdAt}</td>
-            <td className="px-6 py-4 flex gap-2">
-              <Link
-                href={`/dashboard/blog/${post._id}/edit`}
-                className="text-blue-600 hover:underline"
-              >
-                Edit
-              </Link>
-              <button
-                type="button"
-                className="text-red-600 hover:underline"
-                onClick={() => handleDelete(post._id.toString())}
-              >
-                Delete
-              </button>
+            <td
+              className={`p-2 border-b ${
+                /[\u0590-\u05FF]/.test(post.content) ? "text-right" : ""
+              }`}
+              dir={/[\u0590-\u05FF]/.test(post.content) ? "rtl" : "ltr"}
+            >
+              {post.content}
             </td>
+            <td className="p-2 border-b">{post.createdAt}</td>
           </tr>
         ))}
       </tbody>
