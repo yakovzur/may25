@@ -49,7 +49,7 @@ export default function TodoList({ initialTodos }: { initialTodos: any[] }) {
         <li key={todo._id} className="flex items-center gap-2">
           {/* Edit/Save Form */}
           <form
-            ref={el => (updateRefs.current[todo._id] = el)}
+            ref={el => { updateRefs.current[todo._id] = el; }}
             action={updateTodo}
             className="flex-1 flex gap-1"
             onSubmit={e => {
@@ -93,7 +93,6 @@ export default function TodoList({ initialTodos }: { initialTodos: any[] }) {
                   title="Save"
                   aria-label="Save"
                 >
-                  <CheckIcon className="w-3 h-3" />
                   <span className="text-lg text-black text-center">S</span>
                 </button>
                 <button
