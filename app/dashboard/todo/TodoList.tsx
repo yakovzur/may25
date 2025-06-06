@@ -119,7 +119,7 @@ export default function TodoList({ initialTodos }: { initialTodos: any[] }) {
           </form>
           {/* Hidden form for delete */}
           <form
-            ref={el => (deleteRefs.current[todo._id] = el)}
+            ref={el => { deleteRefs.current[todo._id] = el; }}
             action={deleteTodo}
             style={{ display: 'none' }}
           >
@@ -127,7 +127,7 @@ export default function TodoList({ initialTodos }: { initialTodos: any[] }) {
           </form>
           {/* Hidden form for complete */}
           <form
-            ref={el => (completeRefs.current[todo._id] = el)}
+            ref={el => { completeRefs.current[todo._id] = el; }}
             action={markTodoCompleted}
             style={{ display: 'none' }}
           >
